@@ -57,6 +57,7 @@ public class MainCli implements ApplicationRunner {
      * dt = Date-To (BacklogPolicy, Agents -> Calls-Per-Day -> Number-of-Days)
      * IMPORTANT: nos cannot be defined with "cpd"+"nod" or with "cpd"+"date-from"+"date-to".
      * ------------------------------------------------------------------------------------
+     * --p=steady --o=rmq --noa=10 --unp=100 --cpd=1000 --doc=5 --nod=5
      */
     public void run(ApplicationArguments args) throws IllegalArgumentException {
         if (ObjectUtils.isEmpty(args.getSourceArgs())) {
