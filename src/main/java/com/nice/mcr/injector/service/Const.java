@@ -2,7 +2,7 @@ package com.nice.mcr.injector.service;
 
 import java.util.Random;
 
-public class Consts {
+public class Const {
 
     static final String VERSION = "version";
     static final String TENANT_ID = "tenantId";

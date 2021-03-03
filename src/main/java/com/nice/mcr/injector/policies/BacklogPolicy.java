@@ -4,7 +4,7 @@ import com.nice.mcr.injector.MainCli;
 import com.nice.mcr.injector.config.ApplicationContextProvider;
 import com.nice.mcr.injector.mock.UserAdminRestClientMock;
 import com.nice.mcr.injector.model.Agent;
-import com.nice.mcr.injector.service.Consts;
+import com.nice.mcr.injector.service.Const;
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
 import org.mapdb.HTreeMap;
@@ -219,7 +219,7 @@ public class BacklogPolicy implements Policy {
 
     @Override
     public List<LocalTime> generateListOfCallsPerDay(int numberOfCallsPerDay, int durationOfCallInMinutes) {
-        final int timeIntervalBetweenCallInMinutes = (Consts.MINUTES_PER_DAY - (durationOfCallInMinutes * (numberOfCallsPerDay + 1))) / (numberOfCallsPerDay + 1);
+        final int timeIntervalBetweenCallInMinutes = (Const.MINUTES_PER_DAY - (durationOfCallInMinutes * (numberOfCallsPerDay + 1))) / (numberOfCallsPerDay + 1);
 
         //  For the first gap there's no need to add the call duration
         LocalTime timeCallStarted = LocalTime.MIN.plusMinutes(timeIntervalBetweenCallInMinutes);

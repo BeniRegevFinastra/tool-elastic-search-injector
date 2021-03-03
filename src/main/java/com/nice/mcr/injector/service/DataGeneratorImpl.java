@@ -115,25 +115,25 @@ public class DataGeneratorImpl implements DataGenerator {
         //  region packing it all together into one JSONObject
         //JSONObject jsonObj = new JSONObject();
         jsonObj = new JSONObject();
-        jsonObj.put(Consts.VERSION, getRandomLong());
-        jsonObj.put(Consts.TENANT_ID, getRandomInt());
-        jsonObj.put(Consts.SWITCH_ID, getRandomInt());
-        jsonObj.put(Consts.CONTACT_ID, contactId);
-        jsonObj.put(Consts.CONTACT_START_TIME, callStartDateTime.format(DATE_FORMAT));
-        jsonObj.put(Consts.CONTACT_END_TIME, callStartDateTime.plusMinutes(durationOfCall / 2).format(DATE_FORMAT));
-        jsonObj.put(Consts.SEGMENT_ID, getRandomLong());
-        jsonObj.put(Consts.SEGMENT_START_TIME, callStartDateTime.format(DATE_FORMAT));
-        jsonObj.put(Consts.SEGMENT_END_TIME, callStartDateTime.plusMinutes(durationOfCall).format(DATE_FORMAT));
-        jsonObj.put(Consts.CALL_DIRECTION, randomDirectionType);
-        jsonObj.put(Consts.BUSINESS_DATA, generateRandomString(20));    //  T.B.D.
-        jsonObj.put(Consts.DNIS, String.valueOf(getRandomWithRange(972500000, 972540000)));
-        jsonObj.put(Consts.PBX_CALL_ID, getRandomInt());
-        jsonObj.put(Consts.PBX_UNIQUE_CALL_ID, generateRandomString(25));
-        jsonObj.put(Consts.PARTICIPANTS, participants);
-        jsonObj.put(Consts.RECORDINGS, recordings);
-        jsonObj.put(Consts.EXCEPTIONS, new JSONArray());
-        jsonObj.put(Consts.RECORDING_STATUS, recordingStatus);
-        jsonObj.put(Consts.RECORDING_STATUS, joRecordingStatus);
+        jsonObj.put(Const.VERSION, getRandomLong());
+        jsonObj.put(Const.TENANT_ID, getRandomInt());
+        jsonObj.put(Const.SWITCH_ID, getRandomInt());
+        jsonObj.put(Const.CONTACT_ID, contactId);
+        jsonObj.put(Const.CONTACT_START_TIME, callStartDateTime.format(DATE_FORMAT));
+        jsonObj.put(Const.CONTACT_END_TIME, callStartDateTime.plusMinutes(durationOfCall / 2).format(DATE_FORMAT));
+        jsonObj.put(Const.SEGMENT_ID, getRandomLong());
+        jsonObj.put(Const.SEGMENT_START_TIME, callStartDateTime.format(DATE_FORMAT));
+        jsonObj.put(Const.SEGMENT_END_TIME, callStartDateTime.plusMinutes(durationOfCall).format(DATE_FORMAT));
+        jsonObj.put(Const.CALL_DIRECTION, randomDirectionType);
+        jsonObj.put(Const.BUSINESS_DATA, generateRandomString(20));    //  T.B.D.
+        jsonObj.put(Const.DNIS, String.valueOf(getRandomWithRange(972500000, 972540000)));
+        jsonObj.put(Const.PBX_CALL_ID, getRandomInt());
+        jsonObj.put(Const.PBX_UNIQUE_CALL_ID, generateRandomString(25));
+        jsonObj.put(Const.PARTICIPANTS, participants);
+        jsonObj.put(Const.RECORDINGS, recordings);
+        jsonObj.put(Const.EXCEPTIONS, new JSONArray());
+        jsonObj.put(Const.RECORDING_STATUS, recordingStatus);
+        jsonObj.put(Const.RECORDING_STATUS, joRecordingStatus);
         stringBuffer.append(jsonObj.toString() + "\n");
         //  endregion
 
@@ -153,9 +153,9 @@ public class DataGeneratorImpl implements DataGenerator {
 
         //  Participant is an Agent, use agentId, agent first & last name
         JSONObject jo = generateParticipantsJsonObject("Internal", false, Arrays.asList(1, 3));
-        jo.put(Consts.AGENT_ID, String.valueOf(getRandomWithRange(1, 101)));
-        jo.put(Consts.NVC_FIRST_NAME, agent.getFirstName());
-        jo.put(Consts.NVC_LAST_NAME, agent.getLastName());
+        jo.put(Const.AGENT_ID, String.valueOf(getRandomWithRange(1, 101)));
+        jo.put(Const.NVC_FIRST_NAME, agent.getFirstName());
+        jo.put(Const.NVC_LAST_NAME, agent.getLastName());
         participants.put(jo);
 
         //  Participant is NOT an agent
@@ -172,17 +172,17 @@ public class DataGeneratorImpl implements DataGenerator {
     private JSONObject generateParticipantsJsonObject(String participantType, boolean isInitiator, List recordings) throws JSONException {
         JSONObject jsonObj = new JSONObject();
 
-        jsonObj.put(Consts.USER_ID, getRandomWithRange(1, Integer.MAX_VALUE));
-        jsonObj.put(Consts.CTI_USER_IDENTIFIER, null);
-        jsonObj.put(Consts.AGENT_ID, "null");
-        jsonObj.put(Consts.PHONE_NUMBER, String.valueOf(getRandomWithRange(972500000, 972540000)));
-        jsonObj.put(Consts.UNIQUE_DEVICE_ID, "SEP000000008068");
-        jsonObj.put(Consts.USER_GROUP_IDS, new JSONArray());
-        jsonObj.put(Consts.PARTICIPANT_TYPE, participantType);
-        jsonObj.put(Consts.IS_INITIATOR, isInitiator);
-        jsonObj.put(Consts.RECORDINGS, recordings);
-        jsonObj.put(Consts.NVC_FIRST_NAME, firstNames.get(random.nextInt(firstNames.size())));
-        jsonObj.put(Consts.NVC_LAST_NAME, lastNames.get(random.nextInt(lastNames.size())));
+        jsonObj.put(Const.USER_ID, getRandomWithRange(1, Integer.MAX_VALUE));
+        jsonObj.put(Const.CTI_USER_IDENTIFIER, null);
+        jsonObj.put(Const.AGENT_ID, "null");
+        jsonObj.put(Const.PHONE_NUMBER, String.valueOf(getRandomWithRange(972500000, 972540000)));
+        jsonObj.put(Const.UNIQUE_DEVICE_ID, "SEP000000008068");
+        jsonObj.put(Const.USER_GROUP_IDS, new JSONArray());
+        jsonObj.put(Const.PARTICIPANT_TYPE, participantType);
+        jsonObj.put(Const.IS_INITIATOR, isInitiator);
+        jsonObj.put(Const.RECORDINGS, recordings);
+        jsonObj.put(Const.NVC_FIRST_NAME, firstNames.get(random.nextInt(firstNames.size())));
+        jsonObj.put(Const.NVC_LAST_NAME, lastNames.get(random.nextInt(lastNames.size())));
         return jsonObj;
     }
 
@@ -218,15 +218,15 @@ public class DataGeneratorImpl implements DataGenerator {
     @NotNull
     private JSONObject generateRecordingsJsonObject(LocalDateTime callStartDateTime, int durationOfCall, String direction) throws JSONException {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put(Consts.RECORDING_ID, 1);
-        jsonObject.put(Consts.MEDIA_TYPE, MediaTypes.getRandomMediaType().toString());
-        jsonObject.put(Consts.DIRECTION, direction);
-        jsonObject.put(Consts.SESSION_ID, getRandomLong());
-        jsonObject.put(Consts.RECORDER_ID, 63);
-        jsonObject.put(Consts.RECORDING_START_TIME, callStartDateTime.format(DATE_FORMAT));
-        jsonObject.put(Consts.RECORDING_END_TIME, callStartDateTime.plusMinutes(durationOfCall).format(DATE_FORMAT));
-        jsonObject.put(Consts.RECORDING_STATUS, "Successful");
-        jsonObject.put(Consts.RECORDING_POLICY_ID, 0);
+        jsonObject.put(Const.RECORDING_ID, 1);
+        jsonObject.put(Const.MEDIA_TYPE, MediaTypes.getRandomMediaType().toString());
+        jsonObject.put(Const.DIRECTION, direction);
+        jsonObject.put(Const.SESSION_ID, getRandomLong());
+        jsonObject.put(Const.RECORDER_ID, 63);
+        jsonObject.put(Const.RECORDING_START_TIME, callStartDateTime.format(DATE_FORMAT));
+        jsonObject.put(Const.RECORDING_END_TIME, callStartDateTime.plusMinutes(durationOfCall).format(DATE_FORMAT));
+        jsonObject.put(Const.RECORDING_STATUS, "Successful");
+        jsonObject.put(Const.RECORDING_POLICY_ID, 0);
 
         return jsonObject;
     }
@@ -248,33 +248,33 @@ public class DataGeneratorImpl implements DataGenerator {
             StringBuffer firstName = new StringBuffer(firstNames.get(random.nextInt(firstNames.size())));
             StringBuffer lastName = new StringBuffer(lastNames.get(random.nextInt(lastNames.size())));
             JSONObject jo = new JSONObject();
-            jo.put(Consts.USER_ID, getRandomWithRange(1, Integer.MAX_VALUE));
-            jo.put(Consts.CTI_USER_IDENTIFIER, null);
-            jo.put(Consts.AGENT_ID, null);
-            jo.put(Consts.PHONE_NUMBER, String.valueOf(getRandomWithRange(972500000, 972540000)));
-            jo.put(Consts.UNIQUE_DEVICE_ID, "");
-            jo.put(Consts.USER_GROUP_IDS, new JSONArray());
-            jo.put(Consts.PARTICIPANT_TYPE, "External");
-            jo.put(Consts.IS_INITIATOR, false);
-            jo.put(Consts.RECORDINGS, Arrays.asList(1, 3));
-            jo.put(Consts.FIRST_NAME, firstName.toString());
-            jo.put(Consts.LAST_NAME, lastName.toString());
+            jo.put(Const.USER_ID, getRandomWithRange(1, Integer.MAX_VALUE));
+            jo.put(Const.CTI_USER_IDENTIFIER, null);
+            jo.put(Const.AGENT_ID, null);
+            jo.put(Const.PHONE_NUMBER, String.valueOf(getRandomWithRange(972500000, 972540000)));
+            jo.put(Const.UNIQUE_DEVICE_ID, "");
+            jo.put(Const.USER_GROUP_IDS, new JSONArray());
+            jo.put(Const.PARTICIPANT_TYPE, "External");
+            jo.put(Const.IS_INITIATOR, false);
+            jo.put(Const.RECORDINGS, Arrays.asList(1, 3));
+            jo.put(Const.FIRST_NAME, firstName.toString());
+            jo.put(Const.LAST_NAME, lastName.toString());
             participants.put(jo);
 
             firstName = new StringBuffer(firstNames.get(random.nextInt(firstNames.size())));
             lastName = new StringBuffer(lastNames.get(random.nextInt(lastNames.size())));
             jo = new JSONObject();
-            jo.put(Consts.USER_ID, getRandomWithRange(1, Integer.MAX_VALUE));
-            jo.put(Consts.CTI_USER_IDENTIFIER, null);
-            jo.put(Consts.AGENT_ID, null);
-            jo.put(Consts.PHONE_NUMBER, String.valueOf(getRandomWithRange(972500000, 972540000)));
-            jo.put(Consts.UNIQUE_DEVICE_ID, "SEP000000008068");
-            jo.put(Consts.USER_GROUP_IDS, new JSONArray());
-            jo.put(Consts.PARTICIPANT_TYPE, "Internal");
-            jo.put(Consts.IS_INITIATOR, false);
-            jo.put(Consts.RECORDINGS, Arrays.asList(2, 4));
-            jo.put(Consts.FIRST_NAME, firstName.toString());
-            jo.put(Consts.LAST_NAME, lastName.toString());
+            jo.put(Const.USER_ID, getRandomWithRange(1, Integer.MAX_VALUE));
+            jo.put(Const.CTI_USER_IDENTIFIER, null);
+            jo.put(Const.AGENT_ID, null);
+            jo.put(Const.PHONE_NUMBER, String.valueOf(getRandomWithRange(972500000, 972540000)));
+            jo.put(Const.UNIQUE_DEVICE_ID, "SEP000000008068");
+            jo.put(Const.USER_GROUP_IDS, new JSONArray());
+            jo.put(Const.PARTICIPANT_TYPE, "Internal");
+            jo.put(Const.IS_INITIATOR, false);
+            jo.put(Const.RECORDINGS, Arrays.asList(2, 4));
+            jo.put(Const.FIRST_NAME, firstName.toString());
+            jo.put(Const.LAST_NAME, lastName.toString());
             participants.put(jo);
 
             firstName = new StringBuffer(firstNames.get(random.nextInt(firstNames.size())));
@@ -289,8 +289,8 @@ public class DataGeneratorImpl implements DataGenerator {
             jo.put("participantType", "Internal");
             jo.put("isInitiator", true);
             jo.put("recordings", Arrays.asList(2, 4));
-            jo.put(Consts.FIRST_NAME, firstName.toString());
-            jo.put(Consts.LAST_NAME, lastName.toString());
+            jo.put(Const.FIRST_NAME, firstName.toString());
+            jo.put(Const.LAST_NAME, lastName.toString());
             participants.put(jo);
             //  endregion
 
@@ -354,25 +354,25 @@ public class DataGeneratorImpl implements DataGenerator {
 
             //JSONObject jsonObj = new JSONObject();
             jsonObj = new JSONObject();
-            jsonObj.put(Consts.VERSION, getRandomLong());
-            jsonObj.put(Consts.TENANT_ID, getRandomInt());
-            jsonObj.put(Consts.SWITCH_ID, getRandomInt());
-            jsonObj.put(Consts.CONTACT_ID, getRandomInt());
-            jsonObj.put(Consts.CONTACT_START_TIME, startDate.format(DATE_FORMAT));
-            jsonObj.put(Consts.CONTACT_END_TIME, startDate.plusSeconds(150).format(DATE_FORMAT));
-            jsonObj.put(Consts.SEGMENT_ID, getRandomLong());
-            jsonObj.put(Consts.SEGMENT_START_TIME, startDate.format(DATE_FORMAT));
-            jsonObj.put(Consts.SEGMENT_END_TIME, startDate.plusMinutes(5).format(DATE_FORMAT));
-            jsonObj.put(Consts.CALL_DIRECTION, randomDirectionType);
-            jsonObj.put(Consts.BUSINESS_DATA, generateRandomString(20));    //  T.B.D.
-            jsonObj.put(Consts.DNIS, String.valueOf(getRandomWithRange(972500000, 972540000)));
-            jsonObj.put(Consts.PBX_CALL_ID, getRandomInt());
-            jsonObj.put(Consts.PBX_UNIQUE_CALL_ID, generateRandomString(25));
-            jsonObj.put(Consts.PARTICIPANTS, participants);
-            jsonObj.put(Consts.RECORDINGS, recordings);
-            jsonObj.put(Consts.EXCEPTIONS, new JSONArray());
-            jsonObj.put(Consts.RECORDING_STATUS, recordingStatus);
-            jsonObj.put(Consts.RECORDING_STATUS, joRecordingStatus);
+            jsonObj.put(Const.VERSION, getRandomLong());
+            jsonObj.put(Const.TENANT_ID, getRandomInt());
+            jsonObj.put(Const.SWITCH_ID, getRandomInt());
+            jsonObj.put(Const.CONTACT_ID, getRandomInt());
+            jsonObj.put(Const.CONTACT_START_TIME, startDate.format(DATE_FORMAT));
+            jsonObj.put(Const.CONTACT_END_TIME, startDate.plusSeconds(150).format(DATE_FORMAT));
+            jsonObj.put(Const.SEGMENT_ID, getRandomLong());
+            jsonObj.put(Const.SEGMENT_START_TIME, startDate.format(DATE_FORMAT));
+            jsonObj.put(Const.SEGMENT_END_TIME, startDate.plusMinutes(5).format(DATE_FORMAT));
+            jsonObj.put(Const.CALL_DIRECTION, randomDirectionType);
+            jsonObj.put(Const.BUSINESS_DATA, generateRandomString(20));    //  T.B.D.
+            jsonObj.put(Const.DNIS, String.valueOf(getRandomWithRange(972500000, 972540000)));
+            jsonObj.put(Const.PBX_CALL_ID, getRandomInt());
+            jsonObj.put(Const.PBX_UNIQUE_CALL_ID, generateRandomString(25));
+            jsonObj.put(Const.PARTICIPANTS, participants);
+            jsonObj.put(Const.RECORDINGS, recordings);
+            jsonObj.put(Const.EXCEPTIONS, new JSONArray());
+            jsonObj.put(Const.RECORDING_STATUS, recordingStatus);
+            jsonObj.put(Const.RECORDING_STATUS, joRecordingStatus);
             stringBuilder.append(jsonObj.toString() + "\n");
         }
         return stringBuilder.toString();
